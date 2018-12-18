@@ -1,0 +1,31 @@
+# Demo
+
+## Access App
+- http://localhost:8080/name
+
+## The issue
+- To see the issue, go to: `com.example.demo.controllers.DemoController`
+
+### This configuration raises warnings in intellij (bean not found)
+Intellij doesn't recognize the usage of a constant variable in the `@ComponentScan` 
+and raises the warnings saying 
+"Could not autowire. No beans of 'DemoService' type found.
+Inspection info:Checks autowiring problems in a bean class."
+
+
+```java
+@Configuration
+@ComponentScan({LibraryDemoConfig.CONFIG_PACKAGE}) //this doesn't work
+public class DemoConfig {
+}
+```
+### This configuration works fine, no warnings
+```java
+@Configuration
+@ComponentScan({"com.library.demo"}) //This works
+public class DemoConfig {
+}
+```
+
+Keep in mind that the value of 
+`LibraryDemoConfig.CONFIG_PACKAGE == "com.library.demo"`
